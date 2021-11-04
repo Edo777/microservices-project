@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({postId}) => {
+export default ({postId, fetchPosts}) => {
     const [content, setContent] = useState('');
 
     /**
@@ -14,6 +14,8 @@ export default ({postId}) => {
 
         axios.post(`http://localhost:4001/posts/${postId}/comments`, {
             content
+        }).finally(() => {
+            fetchPosts();
         });
         
         setContent('');
